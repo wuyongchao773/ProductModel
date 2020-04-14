@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>权限详情页面</title>
+<link rel="stylesheet"
+	href="../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="shortcut icon" href="../images/favicon.png" />
+<link rel="stylesheet"
+	href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+
+<link rel="stylesheet" href="../layer/css/layui.css">
+<script type="text/javascript" src="../layer/layui.js"></script>
+<script type="text/javascript" src="../layer/layui.all.js"></script>
+<script type="text/javascript" src="../layer/lay/modules/form.js"></script>
+<script type="text/javascript" src="../layer/lay/modules/code.js"></script>
+<script type="text/javascript" src="../layer/lay/modules/element.js"></script>
+<style type="text/css">
+.layui-form-item {
+	margin: 0 auto;
+	width: 300px;
+	height: 52.2px;
+}
+body{
+	background-color: #eee;
+}
+</style>
+</head>
+<body>
+	<div id="divcss5">
+		<div class="layui-form-item">
+				<label class="layui-form-label">权限名称</label>
+				<div class="layui-input-inline">
+					<input type="text" id="menuName" name="menuName" required lay-verify="required"
+						readonly="readonly" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">权限昵称</label>
+				<div class="layui-input-inline">
+					<input type="text" id="menuDesc" name="menuDesc" required lay-verify="required"
+						readonly="readonly" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">菜单地址</label>
+				<div class="layui-input-inline">
+					<input type="text" id="menuUrl" name="menuUrl" required lay-verify="required"
+						readonly="readonly" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">创建人</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createby" name="createby" required lay-verify="required"
+						readonly="readonly" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">创建时间</label>
+				<div class="layui-input-inline">
+					<input type="text" id="createtime" name="createtime" required lay-verify="required"
+						readonly="readonly" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">是否删除</label>
+				<div class="layui-input-inline">
+					<input type="text" id="deleteStatus" name="deleteStatus" required lay-verify="required"
+						readonly="readonly" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">按钮图标</label>
+				<div class="layui-input-inline">
+					<input type="text" id="sysImage" name="sysImage" required lay-verify="required"
+						readonly="readonly" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+	</div>
+</body>
+	<script>
+		$(function(){
+			var parentData = parent.$("#showObject").val();
+			var jsonObject = JSON.parse(parentData);
+			$("#menuName").val(jsonObject.menuName);
+			$("#menuDesc").val(jsonObject.menuDesc);
+			$("#menuUrl").val(jsonObject.menuUrl);
+			$("#createby").val(jsonObject.createBy);
+			$("#createtime").val(jsonObject.createtime);
+			$("#deleteStatus").val(jsonObject.deleteStatus=='1'?"是":"否");
+			$("#sysImage").val(jsonObject.sysImage);
+		})
+	</script>
+</html>

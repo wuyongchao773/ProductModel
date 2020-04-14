@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.product.dao.SkuMapper">
+  <resultMap id="BaseResultMap" type="com.product.model.Sku">
+    <id column="sku_id" jdbcType="INTEGER" property="skuId" />
+    <result column="product_id" jdbcType="INTEGER" property="productId" />
+    <result column="sku_attr" jdbcType="VARCHAR" property="skuAttr" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="sku_count" jdbcType="INTEGER" property="skuCount" />
+    <result column="sku_num" jdbcType="INTEGER" property="skuNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sku_id, product_id, sku_attr, price, sku_count, sku_num
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sku
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sku
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.product.model.Sku">
+    insert into sku (sku_id, product_id, sku_attr, 
+      price, sku_count, sku_num
+      )
+    values (#{skuId,jdbcType=INTEGER}, #{productId,jdbcType=INTEGER}, #{skuAttr,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{skuCount,jdbcType=INTEGER}, #{skuNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.product.model.Sku">
+    insert into sku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        sku_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="skuAttr != null">
+        sku_attr,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="skuCount != null">
+        sku_count,
+      </if>
+      <if test="skuNum != null">
+        sku_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="skuAttr != null">
+        #{skuAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="skuCount != null">
+        #{skuCount,jdbcType=INTEGER},
+      </if>
+      <if test="skuNum != null">
+        #{skuNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.product.model.Sku">
+    update sku
+    <set>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="skuAttr != null">
+        sku_attr = #{skuAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="skuCount != null">
+        sku_count = #{skuCount,jdbcType=INTEGER},
+      </if>
+      <if test="skuNum != null">
+        sku_num = #{skuNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.product.model.Sku">
+    update sku
+    set product_id = #{productId,jdbcType=INTEGER},
+      sku_attr = #{skuAttr,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      sku_count = #{skuCount,jdbcType=INTEGER},
+      sku_num = #{skuNum,jdbcType=INTEGER}
+    where sku_id = #{skuId,jdbcType=INTEGER}
+  </update>
+</mapper>

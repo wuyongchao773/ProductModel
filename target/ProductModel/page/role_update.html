@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>角色修改页面</title>
+	<link rel="stylesheet" href="../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../images/favicon.png" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <link rel="stylesheet" href="../layer/css/layui.css">
+    <script type="text/javascript" src="../layer/layui.js"></script>
+    <script type="text/javascript" src="../layer/layui.all.js"></script>
+    <script type="text/javascript" src="../layer/lay/modules/form.js"></script>
+    <script type="text/javascript" src="../layer/lay/modules/code.js"></script>
+    <script type="text/javascript" src="../layer/lay/modules/element.js"></script>
+    <script type="text/javascript" src="../layer/lay/modules/table.js"></script>
+<style type="text/css">
+.layui-form-item {
+	margin: 0 auto;
+	width: 300px;
+}
+#modify{
+	width: 126px;
+	background-color: orange;
+	color: white;
+	margin-left: 5rem;
+}
+</style>
+</head>
+<body>
+		<div id="divcss5" style="margin-top: 8rem;">
+			<input id="id" type="hidden" value=""/>
+			<div class="layui-form-item">
+				<label class="layui-form-label">角色名称</label>
+				<div class="layui-input-inline">
+					<input type="text" id="rolename" name="rolename" required lay-verify="required"
+						autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-inline">
+					<button data-method="setTop" id="modify" class="layui-btn">修改</button>
+				</div>
+			</div>
+	</div>
+</body>
+
+	<script type="text/javascript">
+   			layui.use("form",function(){
+   				var form = layui.form;
+   				form.render();
+   			});
+   			
+   			layui.use('laydate', function(){
+   			  var laydate = layui.laydate;
+   			  
+   			  //执行一个laydate实例
+   			  laydate.render({
+   			    elem: '#createtime', //指定元素
+   			    type: 'datetime'
+   			  });
+   			});
+   			
+   			$(function(){
+   				//获得父页面的值
+   				var parentData = parent.$("#showObject").val();
+   				var data = JSON.parse(parentData);
+   				$("#id").val(data.id);
+   				$("#rolename").val(data.roleName);
+   			})
+   			
+   			$("#modify").on("click",function(){
+   				$.ajax({
+   					url : "../role/modifyRole",
+   					type : "POST",
+   					dataType : "JSON",
+   					async: false,
+   					contentType: "application/json",
+   					data : JSON.stringify({
+   						"id" : $("#id").val(),
+   						"roleName":$("#rolename").val()
+   					}),
+   					success : function(data){
+   						if(data.code == 200){
+   							layer.msg(data.message);
+   							setTimeout(function(){
+								//想要关闭当前窗口需要
+   	   							var index = parent.layer.getFrameIndex(window.name);
+   	   							parent.layer.close(index);
+   	   							parent.$("#query").click();
+   							},1000);
+   						}else{
+   							layer.msg(data.message);
+   						}
+   					},
+   					error : function(){
+   						layer.msg("调用角色修改接口发生错误!");
+   					}
+   				})
+   			});
+   	</script>
+   	
+</html>

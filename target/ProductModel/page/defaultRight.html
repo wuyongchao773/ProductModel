@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <link rel="stylesheet" href="../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="shortcut icon" href="../images/favicon.png" />
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+</head>
+<body style="background-image: url('../images/timg.jpg');">
+	<div id="fontColor" style="color: red; font-size: 40px;text-align: center;z-index: 1000;margin-top: 15rem;font-weight: bolder;">
+		欢  迎  来  到  小  家  庭  购  物  网  站  后  台  管  理  系  统
+	</div>
+	<script type="text/javascript">
+		var i = 1;
+		var arr = ["yellow","blue","green","black","pink","white","orange"];
+	
+		function changeColor(){
+			$("#fontColor").css("color",arr[i]);	
+			i++;
+			i=i%7;
+		}
+		
+		setInterval(changeColor,1000);
+	</script>
+</body>
+</html>

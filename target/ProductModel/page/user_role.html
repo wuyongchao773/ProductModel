@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>角色分配页面</title>
+<link rel="stylesheet" href="../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="shortcut icon" href="../images/favicon.png" />
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<link rel="stylesheet" href="../layer/css/layui.css">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="../layer/layui.js"></script>
+<script type="text/javascript" src="../layer/layui.all.js"></script>
+<script type="text/javascript" src="../layer/lay/modules/form.js"></script>
+<script type="text/javascript" src="../layer/lay/modules/code.js"></script>
+<script type="text/javascript" src="../layer/lay/modules/element.js"></script>
+<script type="text/javascript" src="../layer/lay/modules/table.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<style type="text/css">
+	.layui-table-box{
+		width: fit-content;
+		border-color: white;
+	}
+	div[lay-id = 'intfData']{
+		width: fit-content;
+		float: right;
+		padding-right: 2.7rem;
+		border-color: white;
+	}
+	div[lay-id = 'intfData2']{
+		border-color: white;
+	}
+	div[lay-filter="LAY-table-10002"] > div[class="layui-table-page"]{
+		width : 471px !important;
+	}
+</style>
+</head>
+<body>
+	<div class="layui-fluid">
+		<div class="layui-card">
+			<div class="layui-card-body">
+				<div style="padding-bottom: 10px; text-align: right;">
+					<button id="add" class="layui-btn layui-btn-normal">分配角色</button>
+				</div>
+				<table class="layui-hide" id="intfData" lay-filter="intfData"></table>
+				<table class="layui-hide" id="intfData2" lay-filter="intfData2"></table>
+			</div>
+		</div>
+	</div>
+   		<script type="text/javascript">
+   			layui.use("form",function(){
+   				var form = layui.form;
+   				form.render();
+   			});
+   		</script>
+		<script>
+		layui.use('table', function(){
+		  var table1 = layui.table
+    	 ,form = layui.form;
+    	  //第一个表格信息
+		  table1.render({
+		    elem: '#intfData',
+		    url:'../user/UserRolePrimission',
+		    id: 'intfData',
+		    limit : 6,
+		    method: 'post',
+		    where : {
+		    			
+		    },
+		    title: '未查询到指定数据',
+		    defaultToolbar:['exports','print'],
+		    cols: 
+		    [
+		    	[
+			       {type: 'checkbox', fixed: 'left'}
+			      ,{field:'id', title:'ID', align:"center",width:150,unresize: true, sort: true,hide:true}
+			      ,{field:'username',align:"center",title:'用户名称',style:"color:blue;cursor: pointer",width:420}
+		    	]
+		    ],
+		    parseData: function(res){
+				return {
+					"code": 0,
+					"msg":"",
+					"count":res.count,
+					"data": res.data //解析数据列表
+				};
+			},
+		    page: true
+		  });
+		
+		layui.use('table', function(){
+		var table2 = layui.table
+	    	,form = layui.form;
+		  table2.render({
+			    elem: '#intfData2',
+			    url:'../role/queryRole',
+			    id: 'intfData2',
+			    limit : 6,
+			    method: 'post',
+			    where : {
+			    			
+			    },
+			    title: '未查询到指定数据',
+			    defaultToolbar:['exports','print'],
+			    cols: 
+			    [
+			    	[
+				       {type: 'checkbox', fixed: 'left'}
+				      ,{field:'id', title:'ID', align:"center",width:150,unresize: true, sort: true,hide:true}
+				      ,{field:'roleName',align:"center",title:'角色名称',style:"color:blue;cursor: pointer",	width:420}
+			    	]
+			    ],
+			    parseData: function(res){
+					return {
+						"code": 0,
+						"msg":"",
+						"count":res.count,
+						"data": res.data //解析数据列表
+					};
+				},
+			    page: true
+		   });
+			  $("#add").on("click",function(){
+					var checkStatus1 = table1.checkStatus("intfData");
+					data1 = checkStatus1.data;
+					var table1Array = [];
+					data1.forEach(function(n,i){
+						table1Array.push(n.id);
+					})
+					var checkStatus2 = table2.checkStatus("intfData2");
+					data2 = checkStatus2.data;
+					var table2Array = [];
+					data2.forEach(function(n,i){
+						table2Array.push(n.id);
+					})
+					$.ajax({
+						url : "../role/userRoleAction?userIds="+table1Array+"&roleIds="+table2Array,
+						type : "POST",
+						dataType : "JSON",
+						data : {
+							
+						},
+						success : function(data){
+							if(data.code == 200){
+								layer.msg(data.message);
+							}
+							setTimeout(function(){
+								window.location.reload();
+							},1000)
+						},
+						error : function(data){
+							layer.msg("请求分配权限接口失败!")
+						}
+					})
+				});
+			});
+		});
+		</script>
+</body>
+</html>

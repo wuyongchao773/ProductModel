@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.product.dao.SysUserMapper">
+
+  <resultMap id="BaseResultMap" type="com.product.model.SysUser">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="idCard" jdbcType="CHAR" property="idcard" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="mobile" jdbcType="CHAR" property="mobile" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="createBy" jdbcType="VARCHAR" property="createby" />
+    <result column="modifyTime" jdbcType="TIMESTAMP" property="modifytime" />
+    <result column="modifyBy" jdbcType="VARCHAR" property="modifyby" />
+    <result column="delete_status" jdbcType="BIT" property="deleteStatus" />
+    <result column="deleteTime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="deleteBy" jdbcType="VARCHAR" property="deleteby" />
+    <result column="head_image" jdbcType="VARCHAR" property="headImage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, password, realname, idCard, sex, address, telephone, mobile, createTime, 
+    createBy, modifyTime, modifyBy, delete_status, deleteTime, deleteBy, head_image
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.product.model.SysUser">
+    insert into sys_user (id, username, password, 
+      realname, idCard, sex, address, 
+      telephone, mobile, createTime, 
+      createBy, modifyTime, modifyBy, 
+      delete_status, deleteTime, deleteBy, 
+      head_image)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{idcard,jdbcType=CHAR}, #{sex,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{mobile,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createby,jdbcType=VARCHAR}, #{modifytime,jdbcType=TIMESTAMP}, #{modifyby,jdbcType=VARCHAR}, 
+      #{deleteStatus,jdbcType=BIT}, #{deletetime,jdbcType=TIMESTAMP}, #{deleteby,jdbcType=VARCHAR}, 
+      #{headImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.product.model.SysUser">
+    insert into sys_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="idcard != null">
+        idCard,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="createby != null">
+        createBy,
+      </if>
+      <if test="modifytime != null">
+        modifyTime,
+      </if>
+      <if test="modifyby != null">
+        modifyBy,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="deletetime != null">
+        deleteTime,
+      </if>
+      <if test="deleteby != null">
+        deleteBy,
+      </if>
+      <if test="headImage != null">
+        head_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null">
+        #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyby != null">
+        #{modifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=BIT},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteby != null">
+        #{deleteby,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        #{headImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.product.model.SysUser">
+    update sys_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idCard = #{idcard,jdbcType=CHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="modifytime != null">
+        modifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyby != null">
+        modifyBy = #{modifyby,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=BIT},
+      </if>
+      <if test="deletetime != null">
+        deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteby != null">
+        deleteBy = #{deleteby,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        head_image = #{headImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.product.model.SysUser">
+    update sys_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      idCard = #{idcard,jdbcType=CHAR},
+      sex = #{sex,jdbcType=BIT},
+      address = #{address,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=CHAR},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      createBy = #{createby,jdbcType=VARCHAR},
+      modifyTime = #{modifytime,jdbcType=TIMESTAMP},
+      modifyBy = #{modifyby,jdbcType=VARCHAR},
+      delete_status = #{deleteStatus,jdbcType=BIT},
+      deleteTime = #{deletetime,jdbcType=TIMESTAMP},
+      deleteBy = #{deleteby,jdbcType=VARCHAR},
+      head_image = #{headImage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+ 	<select id="selectUserByUserName" parameterType="com.product.model.SysUser" resultMap="BaseResultMap">
+ 		select 
+ 		<include refid="Base_Column_List" />
+ 		from sys_user where username = #{username}
+ 		and delete_status = 0
+ 	</select>
+  
+  <select id="queryAll" parameterType="com.product.model.SysUser" resultMap="BaseResultMap">
+	  	select
+	  	<include refid="Base_Column_List"/>
+	  	from sys_user where 1 = 1 
+	 		<if test="null != address and '' != address">
+	 			and (address = #{address} or address like '%${address}%')
+	 		</if>
+	  		<if test="null != sex and '' != sex">
+	  			and sex = ${sex}
+	  		</if>
+	  		<if test="null != username and '' != username">
+	  			and (username = #{username} or username like '%${username}%')
+	  		</if>
+	  	and realname != #{realname}
+	  	and username != 'admin'
+  </select>
+  
+  <select id="batchDeleteSysUser" parameterType="java.util.List">
+  	delete from sys_user where id in 
+  		<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+  			#{item}
+  		</foreach>
+  </select>
+  
+  <select id="findAll" parameterType="com.product.model.SysUser" resultMap="BaseResultMap">
+  		select id,username  from sys_user
+  		where username != #{username}
+  		and username != 'admin'
+  </select>
+</mapper>

@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.product.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.product.model.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="nickName" jdbcType="VARCHAR" property="nickname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="QQ" jdbcType="VARCHAR" property="qq" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="address1" jdbcType="VARCHAR" property="address1" />
+    <result column="address2" jdbcType="VARCHAR" property="address2" />
+    <result column="idNumber" jdbcType="VARCHAR" property="idnumber" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+    <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
+    <result column="delete_by" jdbcType="VARCHAR" property="deleteBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="account" jdbcType="INTEGER" property="account" />
+    <result column="red_bag" jdbcType="INTEGER" property="redBag" />
+    <result column="get_address" jdbcType="VARCHAR" property="getAddress" />
+    <result column="integral" jdbcType="VARCHAR" property="integral" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="card" jdbcType="CHAR" property="card" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, username, nickName, password, QQ, email, sex, address, mobile, telephone, address1, 
+    address2, idNumber, create_time, create_by, delete_status, delete_time, delete_by, 
+    update_time, update_by, account, red_bag, get_address, integral, id_card, card
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.product.model.User">
+    insert into user (id, username, nickName, 
+      password, QQ, email, 
+      sex, address, mobile, 
+      telephone, address1, address2, 
+      idNumber, create_time, create_by, 
+      delete_status, delete_time, delete_by, 
+      update_time, update_by, account, 
+      red_bag, get_address, integral, 
+      id_card, card)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{address1,jdbcType=VARCHAR}, #{address2,jdbcType=VARCHAR}, 
+      #{idnumber,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{deleteStatus,jdbcType=INTEGER}, #{deleteTime,jdbcType=TIMESTAMP}, #{deleteBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{account,jdbcType=INTEGER}, 
+      #{redBag,jdbcType=INTEGER}, #{getAddress,jdbcType=VARCHAR}, #{integral,jdbcType=VARCHAR}, 
+      #{idCard,jdbcType=VARCHAR}, #{card,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.product.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="nickname != null">
+        nickName,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="qq != null">
+        QQ,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="address1 != null">
+        address1,
+      </if>
+      <if test="address2 != null">
+        address2,
+      </if>
+      <if test="idnumber != null">
+        idNumber,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="deleteTime != null">
+        delete_time,
+      </if>
+      <if test="deleteBy != null">
+        delete_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="redBag != null">
+        red_bag,
+      </if>
+      <if test="getAddress != null">
+        get_address,
+      </if>
+      <if test="integral != null">
+        integral,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="card != null">
+        card,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address1 != null">
+        #{address1,jdbcType=VARCHAR},
+      </if>
+      <if test="address2 != null">
+        #{address2,jdbcType=VARCHAR},
+      </if>
+      <if test="idnumber != null">
+        #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteTime != null">
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteBy != null">
+        #{deleteBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=INTEGER},
+      </if>
+      <if test="redBag != null">
+        #{redBag,jdbcType=INTEGER},
+      </if>
+      <if test="getAddress != null">
+        #{getAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null">
+        #{integral,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null">
+        #{card,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.product.model.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null">
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        QQ = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="address1 != null">
+        address1 = #{address1,jdbcType=VARCHAR},
+      </if>
+      <if test="address2 != null">
+        address2 = #{address2,jdbcType=VARCHAR},
+      </if>
+      <if test="idnumber != null">
+        idNumber = #{idnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="deleteTime != null">
+        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteBy != null">
+        delete_by = #{deleteBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        account = #{account,jdbcType=INTEGER},
+      </if>
+      <if test="redBag != null">
+        red_bag = #{redBag,jdbcType=INTEGER},
+      </if>
+      <if test="getAddress != null">
+        get_address = #{getAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="integral != null">
+        integral = #{integral,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null">
+        card = #{card,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.product.model.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      nickName = #{nickname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      QQ = #{qq,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      address1 = #{address1,jdbcType=VARCHAR},
+      address2 = #{address2,jdbcType=VARCHAR},
+      idNumber = #{idnumber,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      delete_status = #{deleteStatus,jdbcType=INTEGER},
+      delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      delete_by = #{deleteBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      account = #{account,jdbcType=INTEGER},
+      red_bag = #{redBag,jdbcType=INTEGER},
+      get_address = #{getAddress,jdbcType=VARCHAR},
+      integral = #{integral,jdbcType=VARCHAR},
+      id_card = #{idCard,jdbcType=VARCHAR},
+      card = #{card,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.product.dao.AppUserMapper">
+  <resultMap id="BaseResultMap" type="com.product.model.AppUser">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="session_id" jdbcType="VARCHAR" property="sessionId" />
+    <result column="app_username" jdbcType="VARCHAR" property="appUsername" />
+    <result column="app_password" jdbcType="VARCHAR" property="appPassword" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="login_type" jdbcType="VARCHAR" property="loginType" />
+    <result column="sex" jdbcType="INTEGER" property="sex" />
+    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />
+    <result column="telphone" jdbcType="VARCHAR" property="telphone" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="county" jdbcType="VARCHAR" property="county" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="language" jdbcType="VARCHAR" property="language" />
+    <result column="openid" jdbcType="VARCHAR" property="openid" />
+    <result column="head_image" jdbcType="VARCHAR" property="headImage" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+    <result column="delete_time" jdbcType="TIMESTAMP" property="deleteTime" />
+    <result column="delete_by" jdbcType="VARCHAR" property="deleteBy" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, session_id, app_username, app_password, real_name, login_type, sex, birthday, 
+    telphone, mobile, city, county, province, language, openid, head_image, address, 
+    create_time, update_time, update_by, delete_time, delete_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from app_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.product.model.AppUser">
+    insert into app_user (id, session_id, app_username, 
+      app_password, real_name, login_type, 
+      sex, birthday, telphone, 
+      mobile, city, county, 
+      province, language, openid, 
+      head_image, address, create_time, 
+      update_time, update_by, delete_time, 
+      delete_by)
+    values (#{id,jdbcType=VARCHAR}, #{sessionId,jdbcType=VARCHAR}, #{appUsername,jdbcType=VARCHAR}, 
+      #{appPassword,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{loginType,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{birthday,jdbcType=TIMESTAMP}, #{telphone,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, 
+      #{headImage,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, #{deleteTime,jdbcType=TIMESTAMP}, 
+      #{deleteBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.product.model.AppUser">
+    insert into app_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="sessionId != null">
+        session_id,
+      </if>
+      <if test="appUsername != null">
+        app_username,
+      </if>
+      <if test="appPassword != null">
+        app_password,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="loginType != null">
+        login_type,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="telphone != null">
+        telphone,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="county != null">
+        county,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="language != null">
+        language,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="headImage != null">
+        head_image,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+      <if test="deleteTime != null">
+        delete_time,
+      </if>
+      <if test="deleteBy != null">
+        delete_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="sessionId != null">
+        #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="appUsername != null">
+        #{appUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="appPassword != null">
+        #{appPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginType != null">
+        #{loginType,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telphone != null">
+        #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null">
+        #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteBy != null">
+        #{deleteBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.product.model.AppUser">
+    update app_user
+    <set>
+      <if test="sessionId != null">
+        session_id = #{sessionId,jdbcType=VARCHAR},
+      </if>
+      <if test="appUsername != null">
+        app_username = #{appUsername,jdbcType=VARCHAR},
+      </if>
+      <if test="appPassword != null">
+        app_password = #{appPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="loginType != null">
+        login_type = #{loginType,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="telphone != null">
+        telphone = #{telphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null">
+        openid = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="headImage != null">
+        head_image = #{headImage,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteTime != null">
+        delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteBy != null">
+        delete_by = #{deleteBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.product.model.AppUser">
+    update app_user
+    set session_id = #{sessionId,jdbcType=VARCHAR},
+      app_username = #{appUsername,jdbcType=VARCHAR},
+      app_password = #{appPassword,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      login_type = #{loginType,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      birthday = #{birthday,jdbcType=TIMESTAMP},
+      telphone = #{telphone,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      openid = #{openid,jdbcType=VARCHAR},
+      head_image = #{headImage,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR},
+      delete_time = #{deleteTime,jdbcType=TIMESTAMP},
+      delete_by = #{deleteBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="findAll" resultMap="BaseResultMap" parameterType="com.product.model.AppUser">
+  		select 
+  			<include refid="Base_Column_List"/>
+  			from app_user where 1 = 1
+  		<if test="null != realName and '' != realName">
+  			and (real_name = #{realName} or real_name like '%${realName}%')
+  		</if>
+  		<if test="null != sex">
+  			and sex = ${sex}
+  		</if>
+  		<if test="null != mobile and '' != mobile">
+  			and (mobile = #{mobile} or mobile like '%${mobile}%')
+  		</if>
+  </select>
+  
+  <update id="batchAddBlack" parameterType="java.util.List">
+  		update app_user set delete_by = 1 , delete_time = now() 
+  		where id in
+  		<foreach collection="list" open="(" close=")" separator="," item="id">
+  			${id}
+  		</foreach>
+  </update>
+  
+  <update id="updateBlack" parameterType="java.util.List">
+  		update app_user set delete_by = 0 , delete_time = now() 
+  		where id in
+  		<foreach collection="list" open="(" close=")" separator="," item="id">
+  			${id}
+  		</foreach>
+  </update>
+</mapper>

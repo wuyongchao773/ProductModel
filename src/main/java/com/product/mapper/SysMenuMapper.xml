@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.product.dao.SysMenuMapper">
+  <resultMap id="BaseResultMap" type="com.product.model.SysMenu">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_desc" jdbcType="VARCHAR" property="menuDesc" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="createBy" jdbcType="VARCHAR" property="createby" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="updateby" jdbcType="VARCHAR" property="updateby" />
+    <result column="delete_status" jdbcType="TINYINT" property="deleteStatus" />
+    <result column="deletetime" jdbcType="TIMESTAMP" property="deletetime" />
+    <result column="deleteby" jdbcType="VARCHAR" property="deleteby" />
+    <result column="sys_image" jdbcType="VARCHAR" property="sysImage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, menu_name, menu_desc, menu_url, parent_id, createtime, createBy, updatetime, 
+    updateby, delete_status, deletetime, deleteby, sys_image
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_menu
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.product.model.SysMenu">
+    insert into sys_menu (id, menu_name, menu_desc, 
+      menu_url, parent_id, createtime, 
+      createBy, updatetime, updateby, 
+      delete_status, deletetime, deleteby, 
+      sys_image)
+    values (#{id,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuDesc,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createby,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateby,jdbcType=VARCHAR}, 
+      #{deleteStatus,jdbcType=TINYINT}, #{deletetime,jdbcType=TIMESTAMP}, #{deleteby,jdbcType=VARCHAR}, 
+      #{sysImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.product.model.SysMenu">
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuDesc != null">
+        menu_desc,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="createby != null">
+        createBy,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="updateby != null">
+        updateby,
+      </if>
+      <if test="deleteStatus != null">
+        delete_status,
+      </if>
+      <if test="deletetime != null">
+        deletetime,
+      </if>
+      <if test="deleteby != null">
+        deleteby,
+      </if>
+      <if test="sysImage != null">
+        sys_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesc != null">
+        #{menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null">
+        #{deleteStatus,jdbcType=TINYINT},
+      </if>
+      <if test="deletetime != null">
+        #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteby != null">
+        #{deleteby,jdbcType=VARCHAR},
+      </if>
+      <if test="sysImage != null">
+        #{sysImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.product.model.SysMenu">
+    update sys_menu
+    <set>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuDesc != null">
+        menu_desc = #{menuDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createby != null">
+        createBy = #{createby,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateby != null">
+        updateby = #{updateby,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=TINYINT},
+      </if>
+      <if test="deletetime != null">
+        deletetime = #{deletetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteby != null">
+        deleteby = #{deleteby,jdbcType=VARCHAR},
+      </if>
+      <if test="sysImage != null">
+        sys_image = #{sysImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.product.model.SysMenu">
+    update sys_menu
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_desc = #{menuDesc,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      createBy = #{createby,jdbcType=VARCHAR},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      updateby = #{updateby,jdbcType=VARCHAR},
+      delete_status = #{deleteStatus,jdbcType=TINYINT},
+      deletetime = #{deletetime,jdbcType=TIMESTAMP},
+      deleteby = #{deleteby,jdbcType=VARCHAR},
+      sys_image = #{sysImage,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="queryMenuByRoleId" parameterType="java.util.List" resultMap="BaseResultMap">
+  		select
+  		<include refid="Base_Column_List"></include>
+  		from sys_menu 
+  		where id in
+  		<foreach collection="list" index="index" item="item" open="("  separator="," close=")">
+  			#{item} 
+  		</foreach>
+  </select>
+  
+  <!-- 查询所有权限信息 -->
+  <select id="findAll" resultMap="BaseResultMap">
+  	select
+  		<include refid="Base_Column_List"/>
+  	from sys_menu
+  </select>
+  
+  <!-- 批量删除系统信息 -->
+  <delete id="batchDelete" parameterType="java.util.List">
+  		delete from sys_menu
+  		where id in 
+  		<foreach collection="list" open="(" close=")" item="id" separator=",">
+  			#{id}
+  		</foreach>
+  </delete>
+  
+</mapper>

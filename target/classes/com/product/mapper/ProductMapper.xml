@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.product.dao.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.product.model.Product">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="big_image" jdbcType="VARCHAR" property="bigImage" />
+    <result column="middle_image" jdbcType="VARCHAR" property="middleImage" />
+    <result column="small_image" jdbcType="VARCHAR" property="smallImage" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="spu" jdbcType="INTEGER" property="spu" />
+    <result column="comment_num" jdbcType="INTEGER" property="commentNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, product_name, big_image, middle_image, small_image, type_id, user_id, spu, comment_num
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.product.model.Product">
+    insert into product (id, product_name, big_image, 
+      middle_image, small_image, type_id, 
+      user_id, spu, comment_num
+      )
+    values (#{id,jdbcType=INTEGER}, #{productName,jdbcType=VARCHAR}, #{bigImage,jdbcType=VARCHAR}, 
+      #{middleImage,jdbcType=VARCHAR}, #{smallImage,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
+      #{userId,jdbcType=INTEGER}, #{spu,jdbcType=INTEGER}, #{commentNum,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.product.model.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="bigImage != null">
+        big_image,
+      </if>
+      <if test="middleImage != null">
+        middle_image,
+      </if>
+      <if test="smallImage != null">
+        small_image,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="spu != null">
+        spu,
+      </if>
+      <if test="commentNum != null">
+        comment_num,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="bigImage != null">
+        #{bigImage,jdbcType=VARCHAR},
+      </if>
+      <if test="middleImage != null">
+        #{middleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="smallImage != null">
+        #{smallImage,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="spu != null">
+        #{spu,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.product.model.Product">
+    update product
+    <set>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="bigImage != null">
+        big_image = #{bigImage,jdbcType=VARCHAR},
+      </if>
+      <if test="middleImage != null">
+        middle_image = #{middleImage,jdbcType=VARCHAR},
+      </if>
+      <if test="smallImage != null">
+        small_image = #{smallImage,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="spu != null">
+        spu = #{spu,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        comment_num = #{commentNum,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.product.model.Product">
+    update product
+    set product_name = #{productName,jdbcType=VARCHAR},
+      big_image = #{bigImage,jdbcType=VARCHAR},
+      middle_image = #{middleImage,jdbcType=VARCHAR},
+      small_image = #{smallImage,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      spu = #{spu,jdbcType=INTEGER},
+      comment_num = #{commentNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

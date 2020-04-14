@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+  <!DOCTYPE generatorConfiguration 
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<classPathEntry
+		location="E:/ssm-generator/mysql-connector-java-5.1.0-bin.jar" />
+	<context id="my" targetRuntime="MyBatis3">
+		<property name="javaFileEncoding" value="UTF-8" />
+
+		<commentGenerator>
+			<property name="suppressDate" value="false" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3307/test" userId="root"
+			password="19901003" />
+
+		<javaModelGenerator
+			targetPackage="com.product.model"
+			targetProject="ProductModel/src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.product.mapper"
+			targetProject="ProductModel/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator
+			targetPackage="com.product.dao"
+			targetProject="ProductModel/src/main/java" type="XMLMAPPER">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<!-- <table tableName="sys_user" domainObjectName="SysUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+		<table tableName="role" domainObjectName="Role"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+		<table tableName="role_menu" domainObjectName="RoleMenu"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table> -->
+		<!-- <table tableName="sys_user" domainObjectName="SysUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table> -->
+		<!-- <table tableName="user_role" domainObjectName="UserRole"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table> -->
+			<table tableName="app_user" domainObjectName="AppUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+			<table tableName="shopping_cart" domainObjectName="ShoppingCart"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+			<table tableName="attr_value" domainObjectName="AttrValue"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+			<table tableName="product" domainObjectName="Product"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+			<table tableName="product_attr" domainObjectName="ProductAttr"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+			<table tableName="product_attr_screen" domainObjectName="ProductAttrScreen"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+			<table tableName="product_type" domainObjectName="ProductType"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+			<table tableName="sku" domainObjectName="Sku"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+			
+	</context>
+</generatorConfiguration>

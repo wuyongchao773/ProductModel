@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<title>用户信息页面</title>
+    <link rel="stylesheet" href="../vendors/iconfonts/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../images/favicon.png" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+     <link rel="stylesheet" href="../layer/css/layui.css">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="../layer/layui.js"></script>
+    <script type="text/javascript" src="../layer/layui.all.js"></script>
+    <script type="text/javascript" src="../layer/lay/modules/form.js"></script>
+    <script type="text/javascript" src="../layer/lay/modules/code.js"></script>
+    <script type="text/javascript" src="../layer/lay/modules/element.js"></script>
+    <script type="text/javascript" src="../layer/lay/modules/table.js"></script>
+    <style type="text/css">
+    	.layui-inline{
+    		margin-top: 16px;
+    	}
+    	.layui-card-header{
+    		border-bottom: 68px solid #f6f6f6 !important;
+    	}
+    </style>
+</head>
+<body>
+<div class="layui-fluid" >
+  <div class="layui-card" >
+	 <div class="layui-form layui-card-header layuiadmin-card-header-auto" >
+        <div class="layui-form-item">
+          <div class="layui-inline" >
+            <label class="layui-form-label">用户地址</label>
+            <div class="layui-input-inline">
+              <input type="text" id="address" name="address" placeholder="请输入地址" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-inline">
+            <label class="layui-form-label">性别</label>
+			    <div class="layui-input-block">
+			      <select name="sex" id="sex">
+			        <option value="">--请选择--</option>
+			        <option value="0">女</option>
+			        <option value="1">男</option>
+			      </select>
+			    </div>
+          </div>
+          <div class="layui-inline">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline">
+              <input type="text" id="username" name="username" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+            </div>
+          </div>
+          <div class="layui-inline" style="margin-top: 6px;">
+            <button class="layui-btn layuiadmin-btn-list" id="query" lay-submit lay-filter="LAY-app-contlist-search">
+              <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+	  <div class="layui-card-body">
+	  	<div style="padding-bottom: 10px;">
+	  	  <button id="add" class="layui-btn layui-btn-normal" style="margin-left: 50rem;">新增用户</button>
+          <button id="del" class="layui-btn layui-btn-danger">删除用户</button>
+        </div>
+		<table class="layui-hide" id="intfData" lay-filter="intfData"></table>
+	  </div> 
+	</div>
+	<input id="showObject" type="hidden" value=""/>
+	<input id="editUser" type="hidden" value=""/>
+  </div>
+  
+  <!-- 通过脚本配置编辑按钮 -->
+   <script type="text/html" id="barDemo">
+  		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+   </script>
+   
+   		<script type="text/javascript">
+   			layui.use("form",function(){
+   				var form = layui.form;
+   				form.render();
+   			});
+   		</script>
+		<script>
+		layui.use('table', function(){
+		  var table = layui.table
+    	 ,form = layui.form;
+    	 
+		  table.render({
+		    elem: '#intfData',
+		    url:'../user/queryUser',
+		    id: 'intfData',
+		    limit : 7,
+		    method: 'post',
+		    where : {
+		    			"address":$("#address").val(),
+		    			"sex" : $("#sex").val(),
+		    			"username" :$("#name").val()
+		    },
+		    title: '未查询到指定数据',
+		    defaultToolbar:['exports','print'],
+		    cols: 
+		    [
+		    	[
+			       {type: 'checkbox', fixed: 'left'}
+			      ,{field:'id', title:'ID', align:"center",width:150,unresize: true, sort: true,hide:true}
+			      ,{field:'username',align:"center",title:'用户名',style:"color:blue;cursor: pointer",event:"showInfo",width:150}
+			      ,{field:'realname',align:"center", title:'真实姓名',width:120}
+			      ,{field:'idcard',align:"center", title:'身份证号',width:150}
+			      ,{field:'sex',align:"center", title:'性别',width:70}
+			      ,{field:'address',align:"center", title:'家庭住址',width:150}
+			      ,{field:'telephone',align:"center", title:'固定电话',width:150}
+			      ,{field:'mobile',align:"center", title:'手机号',width:150}
+			      ,{field:'createtime',align:"center", title:'创建时间',width:200}
+			      ,{fixed:'right',title:"操作",width: 65, align:'center',style:"color:white", toolbar: '#barDemo',edit: 'text'} //配置了编辑按钮哎这里配置
+		    	]
+		    ],
+		    parseData: function(res){
+				return {
+					"code": 0,
+					"msg":"",
+					"count":res.count,
+					"data": res.data //解析数据列表
+				};
+			},
+		    page: true
+		  });
+		  
+   //监听搜索
+	form.on('submit(LAY-app-contlist-search)', function(data){
+		var field = data.field;
+		//执行重载
+		table.reload('intfData', {
+		    where: field
+		  });
+	 });
+   
+	$("#del").on("click",function(){
+		var checkStatus = table.checkStatus("intfData");
+		data = checkStatus.data;
+		deList = [];
+		data.forEach(function(n,i){
+			deList.push(n.id);
+		})
+		if(deList != ''){
+			layer.confirm('是否删除？',{ btn: ['是','否'] }, function(index){
+				$.ajax({
+					type : "POST",
+					async : false,
+					url : "../user/userDelete?ids="+deList,
+					dataType : "JSON",
+					success : function(data) {
+						if(data.code == "200"){
+							layer.msg(data.message);
+							setTimeout(function(){
+								//执行重载
+								$("#query").click();
+							},1000)
+						}
+					},
+					error:function(){
+			            layer.msg("请求失败！");
+			        }
+
+				});
+				layer.close(index);
+			});
+			return false;
+		}
+	});
+	
+	table.on('tool(intfData)', function(obj){
+	    var data = obj.data;
+	    $("#showObject").val(JSON.stringify(data));
+	     if(obj.event === 'showInfo'){
+	      //layer.alert('编辑行：<br>'+ JSON.stringify(data))
+	      layer.open({
+	        type: 2,
+	        title:"用户个人信息", //不显示标题栏
+	        closeBtn: 2,
+	        area: ['90%', '90%'],
+	        shade: 0.8,
+	        id: (new Date()).valueOf(), //设定一个id，防止重复弹出 时间戳1280977330748
+	        //btn: ['保存', '取消'],
+	        btnAlign: 'r',
+	        moveType: 1, //拖拽模式，0或者1
+	        content: 'userDetail.html'
+	     }); 
+	    }else if(obj.event == 'edit'){
+	    	layer.open({
+	    		type : 2,
+	    		title : "编辑用户信息",
+	    		closeBtn : 2,
+	    		area : ['90%','90%'],
+	    		shade : 0.8,
+	    		id : (new Date()).valueOf(),
+	    		moveType : 1,
+	    		content:'user_update.html'
+	    	});
+	    }
+	  }); 
+	
+	$("#add").on("click",function(){
+		layer.open({
+    		type : 2,
+    		title : "新增用户信息",
+    		closeBtn : 2,
+    		area : ['90%','90%'],
+    		shade : 0.8,
+    		id : (new Date()).valueOf(),
+    		moveType : 1,
+    		content:'user_add.html'
+    	});
+	});
+}); 
+	</script>
+</body>
+</html>
